@@ -407,7 +407,8 @@ extension ZIPFoundationTests {
 #if swift(>=4.0)
 #elseif swift(>=3.0)
 internal extension FileManager {
-    
+
+    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     @objc(swiftCreateFileAtPath:contents:attributes:)
     @discardableResult
     func createFile(atPath path: String,
@@ -419,6 +420,18 @@ internal extension FileManager {
         }
         return createFile(atPath: path, contents: contents, attributes: attributes)
     }
+    #else
+    @discardableResult
+    func createFile(atPath path: String,
+                    contents: Data? = nil,
+                    attributes swift4Attributes: [FileAttributeKey: Any]) -> Bool {
+        var attributes = [String: Any](minimumCapacity: swift4Attributes.count)
+        swift4Attributes.forEach {
+            attributes[$0.key.rawValue] = $0.value
+        }
+        return createFile(atPath: path, contents: contents, attributes: attributes)
+    }
+    #endif
 
     /**
      Not Implemented in swift-corelibs-foundation for Swift 3
