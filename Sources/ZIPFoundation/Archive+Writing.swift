@@ -127,7 +127,7 @@ extension Archive {
             let centralDir = try self.writeCentralDirectoryStructure(localFileHeader: localFileHeader,
                                                                      relativeOffset: offset,
                                                                      externalFileAttributes: externalAttributes)
-            if startOfCD > Int(UInt32.max) { throw ArchiveError.invalidStartOfCentralDirectoryOffset }
+            if UInt64(startOfCD) > UInt64(UInt32.max) { throw ArchiveError.invalidStartOfCentralDirectoryOffset }
             endOfCentralDirRecord = try self.writeEndOfCentralDirectory(centralDirectoryStructure: centralDir,
                                                                         startOfCentralDirectory: UInt32(startOfCD),
                                                                         operation: .add)
