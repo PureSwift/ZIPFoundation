@@ -240,7 +240,7 @@ final class ZIPFoundationTests: XCTestCase {
 extension ZIPFoundationTests {
     // From https://oleb.net/blog/2017/03/keeping-xctest-in-sync/
     func testLinuxTestSuiteIncludesAllTests() {
-        #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+        #if swift(>=3.2) && (os(macOS) || os(iOS) || os(tvOS) || os(watchOS))
             let thisClass = type(of: self)
             let linuxCount = thisClass.allTests.count
             let darwinCount = Int(thisClass
