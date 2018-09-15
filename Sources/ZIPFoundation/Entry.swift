@@ -15,6 +15,7 @@ import CoreFoundation
 ///
 /// You can retrieve instances of `Entry` from an `Archive` via subscripting or iteration.
 /// Entries are identified by their `path`.
+@available(macOS 10.11, *)
 public struct Entry: Equatable {
     /// The type of an `Entry` in a ZIP `Archive`.
     public enum EntryType: Int {
@@ -203,6 +204,7 @@ public struct Entry: Equatable {
     }
 }
 
+@available(macOS 10.11, *)
 extension Entry.LocalFileHeader {
     var data: Data {
         var localFileHeaderSignature = self.localFileHeaderSignature
@@ -257,6 +259,7 @@ extension Entry.LocalFileHeader {
     }
 }
 
+@available(macOS 10.11, *)
 extension Entry.CentralDirectoryStructure {
     var data: Data {
         var centralDirectorySignature = self.centralDirectorySignature
@@ -378,6 +381,7 @@ extension Entry.CentralDirectoryStructure {
     }
 }
 
+@available(macOS 10.11, *)
 extension Entry.DataDescriptor {
     init?(data: Data, additionalDataProvider provider: (Int) throws -> Data) {
         guard data.count == Entry.DataDescriptor.size else { return nil }

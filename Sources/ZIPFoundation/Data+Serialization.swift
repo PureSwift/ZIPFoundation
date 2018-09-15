@@ -16,6 +16,7 @@ protocol DataSerializable {
     var data: Data { get }
 }
 
+@available(macOS 10.11, *)
 extension Data {
     enum DataError: Error {
         case unreadableFile

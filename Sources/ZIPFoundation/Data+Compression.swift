@@ -80,6 +80,7 @@ public let crcTable: [UInt32] = [
     0x5d681b02, 0x2a6f2b94, 0xb40bbe37, 0xc30c8ea1, 0x5a05df1b,
     0x2d02ef8d]
 
+@available(macOS 10.11, *)
 extension Data {
     enum CompressionError: Error {
         case invalidStream
@@ -137,6 +138,7 @@ extension Data {
 #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 import Compression
 
+@available(macOS 10.11, *)
 extension Data {
     @inline(__always)
     static func process(operation: compression_stream_operation, size: Int, bufferSize: Int,

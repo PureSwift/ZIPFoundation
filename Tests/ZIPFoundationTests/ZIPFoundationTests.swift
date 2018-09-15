@@ -16,7 +16,8 @@ enum AdditionalDataError: Error {
     case invalidDataError
 }
 
-class ZIPFoundationTests: XCTestCase {
+@available(macOS 10.11, *)
+final class ZIPFoundationTests: XCTestCase {
     class var testBundle: Bundle {
         return Bundle(for: self)
     }
@@ -235,6 +236,7 @@ class ZIPFoundationTests: XCTestCase {
 
 }
 
+@available(macOS 10.11, *)
 extension ZIPFoundationTests {
     // From https://oleb.net/blog/2017/03/keeping-xctest-in-sync/
     func testLinuxTestSuiteIncludesAllTests() {
@@ -311,9 +313,9 @@ extension ZIPFoundationTests {
             ("testLinuxTestSuiteIncludesAllTests", testLinuxTestSuiteIncludesAllTests)
         ] + darwinOnlyTests
     }
-
+    
     static var darwinOnlyTests: [(String, (ZIPFoundationTests) -> () throws -> Void)] {
-        #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+        #if swift(>=3.2) && (os(macOS) || os(iOS) || os(tvOS) || os(watchOS))
         return [
             ("testZipItemProgress", testZipItemProgress),
             ("testUnzipItemProgress", testUnzipItemProgress),
@@ -327,6 +329,7 @@ extension ZIPFoundationTests {
     }
 }
 
+@available(macOS 10.11, *)
 extension Archive {
     func checkIntegrity() -> Bool {
         var isCorrect = false

@@ -60,6 +60,8 @@ public enum CompressionMethod: UInt16 {
 ///     var archiveURL = URL(fileURLWithPath: "/path/file.zip")
 ///     var archive = Archive(url: archiveURL, accessMode: .update)
 ///     try archive?.addEntry("test.txt", relativeTo: baseURL, compressionMethod: .deflate)
+
+@available(macOS 10.11, *)
 public final class Archive: Sequence {
     typealias LocalFileHeader = Entry.LocalFileHeader
     typealias DataDescriptor = Entry.DataDescriptor
@@ -243,6 +245,7 @@ public final class Archive: Sequence {
     }
 }
 
+@available(macOS 10.11, *)
 extension Archive {
     /// The number of the work units that have to be performed when
     /// removing `entry` from the receiver.
@@ -301,6 +304,7 @@ extension Archive {
     }
 }
 
+@available(macOS 10.11, *)
 extension Archive.EndOfCentralDirectoryRecord {
     var data: Data {
         var endOfCentralDirectorySignature = self.endOfCentralDirectorySignature

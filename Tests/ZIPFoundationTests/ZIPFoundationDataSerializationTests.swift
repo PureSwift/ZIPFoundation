@@ -11,6 +11,7 @@
 import XCTest
 @testable import ZIPFoundation
 
+@available(macOS 10.11, *)
 extension ZIPFoundationTests {
     func testReadStructureErrorConditions() {
         let processInfo = ProcessInfo.processInfo

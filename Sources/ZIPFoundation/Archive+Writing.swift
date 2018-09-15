@@ -10,6 +10,7 @@
 
 import Foundation
 
+@available(macOS 10.11, *)
 extension Archive {
     private enum ModifyOperation: Int {
         case remove = -1

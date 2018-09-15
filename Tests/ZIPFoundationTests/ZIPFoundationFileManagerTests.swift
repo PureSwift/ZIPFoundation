@@ -11,6 +11,7 @@
 import XCTest
 @testable import ZIPFoundation
 
+@available(macOS 10.11, *)
 extension ZIPFoundationTests {
     func testZipItem() {
         let fileManager = FileManager()
@@ -404,9 +405,10 @@ extension ZIPFoundationTests {
 // MARK: - Swift 3 compatibility
 
 #if swift(>=4.0)
-#else
+#elseif swift(>=3.0)
 internal extension FileManager {
-
+    
+    @objc(swiftCreateFileAtPath:contents:attributes:)
     @discardableResult
     func createFile(atPath path: String,
                     contents: Data? = nil,

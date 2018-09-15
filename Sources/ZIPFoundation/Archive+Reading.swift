@@ -10,6 +10,7 @@
 
 import Foundation
 
+@available(macOS 10.11, *)
 extension Archive {
     /// Read a ZIP `Entry` from the receiver and write it to `url`.
     ///
